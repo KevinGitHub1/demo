@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>layuiCMS</name>
@@ -43,3 +44,50 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>layuiCMS</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.genuitec.eclipse.j2eedt.core.WebClasspathBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.genuitec.eclipse.j2eedt.core.J2EEProjectValidator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.genuitec.eclipse.j2eedt.core.DeploymentDescriptorValidator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.genuitec.eclipse.ast.deploy.core.DeploymentBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.genuitec.eclipse.ast.deploy.core.deploymentnature</nature>
+		<nature>com.genuitec.eclipse.j2eedt.core.webnature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+	</natures>
+</projectDescription>
+>>>>>>> 23b20a309b2d8acf57fe1727263b6f8e1fc84aaa

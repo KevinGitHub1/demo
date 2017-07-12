@@ -1,13 +1,26 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+>>>>>>> 23b20a309b2d8acf57fe1727263b6f8e1fc84aaa
 <project-module
   type="WEB"
   name="layuiCMS"
   id="myeclipse.1498716966408"
   context-root="/layuiCMS"
   j2ee-spec="5.0"
+<<<<<<< HEAD
   archive="layuiCMS.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
 </project-module>
 
+=======
+  archive="layuiCMS.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
+>>>>>>> 23b20a309b2d8acf57fe1727263b6f8e1fc84aaa
