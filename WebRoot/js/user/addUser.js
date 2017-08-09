@@ -12,12 +12,15 @@ layui.config({
         form.verify( {
 								username : function(value) {
         	                 if (value.length<6) {
-										return '用户名不能少于六位字符';
+										return '用户名不能少于6个字符';
+									}
+        	                 if (value.length>20) {
+										return '用户名不能超过20个字符';
 									}
 									if (!new RegExp(
-											"^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$")
+											"^[a-zA-Z][a-zA-Z0-9_]*$")//^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$
 											.test(value)) {
-										return '用户名不能有特殊字符';
+										return '用户名只能包含字母、数字和下划线！且不能以下划线开始！';
 									}
 								}
 							});

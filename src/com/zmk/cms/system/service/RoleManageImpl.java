@@ -26,15 +26,16 @@ public class RoleManageImpl implements IRoleManage{
     public ResultBean addRole(String  roleName,String user) {
         ResultBean result = new ResultBean();
         String id = CommUtil.getUUID();
+        String sysdate = CommUtil.getCurrentTime();
         StringBuffer addUserSql = new StringBuffer();
         try {
             addUserSql.append("INSERT INTO T_SYS_ROLE (ID,NAME,CREATE_TIME,CREATE_PERSION) " +
-            		"VALUES ('"+id+"','"+roleName+"',SYSDATE,'"+user+"')");
+            		"VALUES ('"+id+"','"+roleName+"','"+sysdate+"','"+user+"')");
             int i = 0;
                 i = apacheDBUtils.update(addUserSql.toString());
             if(i==1){
                 result.setFlag("success");
-                result.setContent(id);
+                result.setContent(queryRole("").getContent());
             }else{
                 result.setFlag("failure");
             }
@@ -54,7 +55,7 @@ public class RoleManageImpl implements IRoleManage{
             i = apacheDBUtils.update(sql);
             if (i == 1) {
                 result.setFlag("success");
-                result.setContent(roleId);
+                result.setContent(queryRole("").getContent());
             } else {
                 result.setFlag("failure");
             }
@@ -92,16 +93,17 @@ public class RoleManageImpl implements IRoleManage{
     @Override
     public ResultBean editRole(String roleId,String roleName,String user) {
         ResultBean result = new ResultBean();
+        String sysdate = CommUtil.getCurrentTime();
         String sql = "UPDATE T_SYS_ROLE SET NAME='" + roleName
                 + "',EDITE_PERSION='" + user
-                + "',EDITE_TIME=SYSDATE" 
+                + "',EDITE_TIME='" + sysdate
                 + " WHERE ID='" + roleId + "'";
         int i = 0;
         try {
             i = apacheDBUtils.update(sql);
             if (i == 1) {
                 result.setFlag("success");
-                result.setContent(roleId);
+                result.setContent(queryRole("").getContent());
             } else {
                 result.setFlag("failure");
             }

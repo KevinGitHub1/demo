@@ -12,7 +12,7 @@ var navs = [{
 		{
 			"title" : "组织机构管理",
 			"icon" : "&#xe631;",
-			"href" : "",
+			"href" : "page/user/organization.html",
 			"spread" : false
 		},
 		{
@@ -53,7 +53,7 @@ var navs = [{
 		{
 			"title" : "任务管理",
 			"icon" : "&#xe631;",
-			"href" : "",
+			"href" : "page/canvas/canvas3d.html",
 			"spread" : false
 		},
 		{

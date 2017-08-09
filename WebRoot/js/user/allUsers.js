@@ -9,7 +9,7 @@ layui.config({
 	//从后台获取数据
 	var usersData = '';
 	$.ajax({
-			        type: "GET",
+			        type: "POST",
 			        url: "../../web/user/queryUser",
 			        data:"",
 			        dataType: "json",
@@ -33,9 +33,9 @@ layui.config({
 		var userSeach = $(".search_input").val();
 		if(userSeach != ''){
 			$.ajax({
-			        type: "GET",
-			        url: "../../web/user/queryUser?userKey="+userSeach,
-			        data:"",
+			        type: "POST",
+			        url: "../../web/user/queryUser",
+			        data:{userKey:userSeach},
 			        dataType: "json",
 			        async:false,
 			        success: function(data){
@@ -62,7 +62,10 @@ layui.config({
 			success : function(layero, index){
 			    layui.layer.full(index);
 			   // setTimeout("layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});",1000)
-			}
+			},
+		   end: function(){
+				 location.reload();
+		}
 		})
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 		$(window).resize(function(){
@@ -91,28 +94,28 @@ layui.config({
 		}
 		form.render('checkbox');
 	})
-
+String.prototype.trim = function(){ return this.replace(/^\s+|\s+$/g,"")} 
 	//操作
-	$("body").on("click",".users_edit",function(){  //编辑
-		layer.alert('您点击了会员编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
+	$("body").on("click",".users_edit",function(){  //授权
+		layer.alert('您点击了人员授权按钮，暂未实现，后期会添加，敬请谅解。。。',{icon:6, title:'人员授权'});
 	})
-   $("body").on("click",".users_status_change",function(){  //停用
+   $("body").on("click",".users_status_change",function(){  //停用启用
 		var _this = $(this);
 		var change = _this[0].text.trim();
 		var tempValue = "";
 		layer.confirm('确定'+change+'此用户？',{icon:3, title:'提示信息'},function(index){
 			var deleteUesrId = _this.attr("data-id");
 			for(var i=0;i<usersData.length;i++){
-				if(usersData[i].ID == deleteUesrId){
-					if(usersData[i].STATUS==1){
-						usersData[i].STATUS=0;
+				if(usersData[i].id == deleteUesrId){
+					if(usersData[i].status==1){
+						usersData[i].status=0;
 						tempValue=0;
 					}else{
-						usersData[i].STATUS=1;
+						usersData[i].status=1;
 						tempValue=1;
 					}
 					
-					usersList(usersData);
+					usersList();
 				}
 			}
 				//后台改变此用户状态
@@ -138,12 +141,7 @@ layui.config({
 		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
 			//_this.parents("tr").remove();
 			var deleteUesrId = _this.attr("data-id");
-			for(var i=0;i<usersData.length;i++){
-				if(usersData[i].ID == deleteUesrId){
-					usersData.splice(i,1);
-					usersList(usersData);
-				}
-			}
+			
 				//后台删除此用户
 					$.ajax({
 			        type: "POST",
@@ -153,6 +151,12 @@ layui.config({
 			        async:false,
 			        success: function(data){
 		            	if(data.resultBean.flag=="success") {
+		            		for(var i=0;i<usersData.length;i++){
+				if(usersData[i].id == deleteUesrId){
+					usersData.splice(i,1);
+					usersList();
+				}
+			}
 		            		top.layer.msg("删除成功！");
 		            	}else{
 		            		top.layer.msg("删除失败！");
@@ -170,25 +174,28 @@ layui.config({
 			currData = usersData.concat().splice(curr*nums-nums, nums);
 			if(currData.length != 0){
 				for(var i=0;i<currData.length;i++){
-					var tqyong = currData[i].STATUS==1?'停用':'启用';
+					var tqyong = currData[i].status==1?'停用':'启用';
 					dataHtml += '<tr>'
 //			    	+  '<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-			    	+  '<td>'+currData[i].LOGIN_NAME+'</td>'
-			    	+  '<td>'+currData[i].NAME+'</td>'
-			    	+  '<td>'+currData[i].STATUS+'</td>'
-			    	+  '<td>'+currData[i].MOBILE_NUMBER+'</td>'
-			    	+  '<td>'+currData[i].BIRTHDAY+'</td>'
-			    	+  '<td>'+currData[i].MOTTO+'</td>'
-			    	+  '<td>'+currData[i].PROVINCE+currData[i].CITY+currData[i].COUNTY+'</td>'
-			    	+  '<td>'+currData[i].ADRESS+'</td>'
-			    	+  '<td>'+currData[i].EMAIL_ADRESS+'</td>'
-			    	+  '<td>'+currData[i].LOGIN_ADRESS+'</td>'
-			    	+  '<td>'+currData[i].LOGIN_TIME+'</td>'
-			    	+  '<td>'+currData[i].HOBBY+'</td>'
+			    	+  '<td>'+currData[i].login_name+'</td>'
+			    	+  '<td>'+currData[i].name+'</td>'
+			    	+  '<td>'+currData[i].status+'</td>'
+			    	+  '<td>'+currData[i].mobile_number+'</td>'
+			    	+  '<td>'+currData[i].email_adress+'</td>'
+			    	+  '<td>'+currData[i].birthday+'</td>'
+			    	
+			    	+  '<td>'+currData[i].province+currData[i].city+currData[i].county+'</td>'
+			    	+  '<td>'+currData[i].adress+'</td>'
+			    	+  '<td>'+currData[i].motto+'</td>'
+			    	+  '<td>'+currData[i].hobby+'</td>'
+			    	
+			    	+  '<td>'+currData[i].login_adress+'</td>'
+			    	+  '<td>'+currData[i].login_time+'</td>'
+			    	
 			    	+  '<td>'
-			    	+    '<a class="layui-btn layui-btn-mini users_status_change" data-id="'+currData[i].ID+'"><i class="iconfont icon-edit"></i> '+tqyong+'</a>'
-					+    '<a class="layui-btn layui-btn-mini users_edit"><i class="iconfont icon-edit"></i> 授权</a>'
-					+    '<a class="layui-btn layui-btn-danger layui-btn-mini users_del" data-id="'+currData[i].ID+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
+			    	+    '<a class="layui-btn layui-btn-mini users_status_change" data-id="'+currData[i].id+'"><i class="layui-icon">&#xe617;</i>'+tqyong+'</a>'
+					+    '<a class="layui-btn layui-btn-mini users_edit"><i class="layui-icon">&#xe618;</i>授权</a>'
+					+    '<a class="layui-btn layui-btn-danger layui-btn-mini users_del" data-id="'+currData[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
 			        +  '</td>'
 			    	+'</tr>';
 				}

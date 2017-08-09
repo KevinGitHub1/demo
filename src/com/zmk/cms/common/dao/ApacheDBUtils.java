@@ -149,6 +149,7 @@ public class ApacheDBUtils {
                 list = (List<Map<String, Object>>) queryRunner.query(sql,
                         new MapListHandler(), params);
             }
+            LOG.debug(sql);
         } catch (SQLException e) {
             LOG.error("Error occured while attempting to query data", e);
         }

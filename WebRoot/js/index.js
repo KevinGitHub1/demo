@@ -9,6 +9,9 @@ layui.config({
 		tab = layui.bodyTab();
 		var userId = $.session.get("currentUserId");
 		var loginName = $.session.get("currentLoginName");
+		if(loginName==""||undefined==loginName){
+			location.href="./login.html";
+		}
     $("#currentUser").html(loginName);
     //退出系统
     function loginOut(){
@@ -22,6 +25,7 @@ layui.config({
     		 layui.data('navbarCache' , null);
     		 layer.closeAll();
              localStorage.clear();
+             $.session.clear();
     		location.href="./login.html";
         }, no: function(){
            //取消关闭此页面
@@ -224,7 +228,10 @@ layui.config({
 	        id: 'LAY_layuipro', //设定一个id，防止重复弹出
 	        btn: ['火速围观'],
 	        moveType: 1, //拖拽模式，0或者1
-	        content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>最近偶然发现贤心大神的layui框架，瞬间被他的完美样式所吸引，虽然功能不算强大，但毕竟是一个刚刚出现的框架，后面会慢慢完善的。很早之前就想做一套后台模版，但是感觉bootstrop代码的冗余太大，不是非常喜欢，自己写又太累，所以一直闲置了下来。直到遇到了layui我才又燃起了制作一套后台模版的斗志。由于本人只是纯前端，所以页面只是单纯的实现了效果，没有做服务器端的一些处理，可能后期技术跟上了会更新的，如果有什么问题欢迎大家指导。谢谢大家。</p><p>在此特别感谢Beginner和Paco，他们写的框架给了我很好的启发和借鉴。希望有时间可以多多请教。</p></div>',
+	        content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;">' +
+	        '<p>本系统学习layUI框架知识，结合社区的一些模板进行修改完善。系统整合了后台服务代码，现在已具备人员信息管理和登录功能，还有几个技术尝试的demo页面。' +
+	        '后期逐步完善，依次加入权限控制、项目管理模块、库存管理、统计报表展现模块、网络服务模块等。本系统代码只考虑支持Google浏览器，其他浏览器兼容问题不在考虑中。' +
+	        '如果有什么问题欢迎大家指导，谢谢大家。</p><p>借鉴larryUI和那个小马哥的代码，在此鸣谢！</p></div>',
 	        success: function(layero){
 				var btn = layero.find('.layui-layer-btn');
 				btn.css('text-align', 'center');

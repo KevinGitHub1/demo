@@ -32,7 +32,7 @@ layui.config({
 		            		top.layer.msg("角色添加成功！");
                             var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
                             parent.layer.close(index); //执行关闭
- 		            		location.href="./allRoles.html";
+ 		            		//location.href="./allRoles.html";
 		            	}else{
 		            		top.layer.msg("角色添加失败！");
 		            	}

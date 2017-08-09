@@ -42,18 +42,18 @@ layui.config({
 						//给各个编辑框赋值
 				var userInfo = data.resultBean.content;
 				if (userInfo.length > 0) {
-					$("#loginName").val(userInfo[0].LOGIN_NAME);
-					$("#userName").val(userInfo[0].NAME);
-					$("#mobile").val(userInfo[0].MOBILE_NUMBER);
-					$("#email").val(userInfo[0].EMAIL_ADRESS);
-					$("#birthday").val(userInfo[0].BIRTHDAY);
-					var provinceName = userInfo[0].PROVINCE;
-					var city = userInfo[0].CITY;
-					var county = userInfo[0].COUNTY;
+					$("#loginName").val(userInfo[0].login_name);
+					$("#userName").val(userInfo[0].name);
+					$("#mobile").val(userInfo[0].mobile_number);
+					$("#email").val(userInfo[0].email_adress);
+					$("#birthday").val(userInfo[0].birthday);
+					var provinceName = userInfo[0].province;
+					var city = userInfo[0].city;
+					var county = userInfo[0].county;
 					loadProvince(provinceName,city,county);
-				$("#adress").val(userInfo[0].ADRESS);
-				$("#hobby").val(userInfo[0].HOBBY);
-				$("#motto").val(userInfo[0].MOTTO);
+				$("#adress").val(userInfo[0].adress);
+				$("#hobby").val(userInfo[0].hobby);
+				$("#motto").val(userInfo[0].motto);
 			}
 		}else{
 		            		layer.msg("获取用户信息失败！");

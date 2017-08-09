@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组织机构管理</title>
+		<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+		<script src="../../layui/lay/dest/layui.all.js"></script> 
+		<script src="../../jsplugin/jquery-2.1.1.js"></script>
+	</head>
+	<body>
+		<blockquote class="layui-elem-quote news_search">
+		<div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" id="seachId" value="" placeholder="请输入关键字" class="layui-input search_input">
+		    </div>
+		    <a class="layui-btn search_btn">查询</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-normal unitAdd_btn">添加单位</a>
+			<a class="layui-btn layui-btn-normal deptAdd_btn">添加部门或分组</a>
+		</div>
+		
+	</blockquote>
+		<div style="box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -o-box-sizing:border-box; ">
+   <div  style=" width: 18%; height: 710px; float: left; border: 1px solid #000">
+    <ul id="demo1"></ul></div>
+			<div style="width: 80%; height: 710px; float: left; border: 1px solid #000 ;position:relative;overflow:auto ">
+			<div class="layui-form news_list" style="overflow:auto">
+	  	<table class="layui-table">
+		    <colgroup>
+				<col width="50">
+				<col width="50">
+				<col width="50">
+		    </colgroup>
+		    <thead>
+				<tr>
+<!--					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>-->
+					<th>名称</th>
+					<th>编号</th>
+					<th>操作</th>
+				</tr> 
+		    </thead>
+		    <tbody class="users_content"></tbody>
+		</table>
+	</div>
+	<div id="page"></div>
+			</div>
+			</div>
+		<script src="../../js/user/organization.js">
+</script>
+	</body>
+</html>

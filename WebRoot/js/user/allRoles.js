@@ -51,7 +51,7 @@ layui.config({
 	})
 
 	//添加角色
-	$(".usersAdd_btn").click(function(){
+	$(".rolesAdd_btn").click(function(){
 		var index = layui.layer.open({
 			title : "添加角色",
 			type : 2,
@@ -59,7 +59,10 @@ layui.config({
 			success : function(layero, index){
 			    layui.layer.full(index);
 			   // setTimeout("layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});",1000)
-			}
+			},
+			end: function(){
+				 location.reload();
+		}
 		})
 		//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 		$(window).resize(function(){
@@ -90,21 +93,17 @@ layui.config({
 	})
 
 	//操作
-	$("body").on("click",".users_edit",function(){  //编辑
-		layer.alert('您点击了会员编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'文章编辑'});
+	$("body").on("click",".roles_edit",function(){  //编辑
+		layer.alert('您点角色授权按钮，暂未实现，后期会添加，敬请谅解。。。',{icon:6, title:'角色权限'});
 	})
  
-	$("body").on("click",".users_del",function(){  //删除
+	$("body").on("click",".roles_del",function(){  //删除
+		
 		var _this = $(this);
 		layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
 			//_this.parents("tr").remove();
 			var deleteRoleId = _this.attr("data-id");
-			for(var i=0;i<rolesData.length;i++){
-				if(rolesData[i].ID == deleteRoleId){
-					rolesData.splice(i,1);
-					rolesList(rolesData);
-				}
-			}
+			
 				//后台删除此用户
 					$.ajax({
 			        type: "POST",
@@ -114,6 +113,16 @@ layui.config({
 			        async:false,
 			        success: function(data){
 		            	if(data.resultBean.flag=="success") {
+//		            		for(var i=0;i<rolesData.length;i++){
+//				         if(rolesData[i].ID == deleteRoleId){
+//					         debugger;
+//					           rolesData.splice(i,1);
+//					      rolesList();
+//				}
+//			}
+		            		rolesData = data.resultBean.content;//查询成功获取数据
+		            		//执行加载数据的方法
+		                    rolesList();
 		            		top.layer.msg("删除成功！");
 		            	}else{
 		            		top.layer.msg("删除失败！");
@@ -133,14 +142,14 @@ layui.config({
 				for(var i=0;i<currData.length;i++){
 					dataHtml += '<tr>'
 //			    	+  '<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-			    	+  '<td>'+currData[i].NAME+'</td>'
-			    	+  '<td>'+currData[i].CREATE_TIME+'</td>'
-			    	+  '<td>'+currData[i].CREATE_PERSION+'</td>'
-			    	+  '<td>'+currData[i].EDITE_TIME+'</td>'
-			    	+  '<td>'+currData[i].EDITE_PERSION+'</td>'
+			    	+  '<td>'+currData[i].name+'</td>'
+			    	+  '<td>'+currData[i].create_time+'</td>'
+			    	+  '<td>'+currData[i].create_persion+'</td>'
+			    	+  '<td>'+currData[i].edite_time+'</td>'
+			    	+  '<td>'+currData[i].edite_persion+'</td>'
 			    	+  '<td>'
-					+    '<a class="layui-btn layui-btn-mini users_edit"><i class="iconfont icon-edit"></i> 授权</a>'
-					+    '<a class="layui-btn layui-btn-danger layui-btn-mini users_del" data-id="'+currData[i].ID+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
+					+    '<a class="layui-btn layui-btn-mini roles_edit"><i class="layui-icon">&#xe618;</i> 授权</a>'
+					+    '<a class="layui-btn layui-btn-danger layui-btn-mini roles_del" data-id="'+currData[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
 			        +  '</td>'
 			    	+'</tr>';
 				}

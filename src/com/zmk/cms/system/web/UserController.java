@@ -31,7 +31,7 @@ public class UserController {
         ResultBean result =  userManage.deleteUser(userId);
         return result;
     }
-    @RequestMapping(value = "/queryUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/queryUser", method = RequestMethod.POST)
     public ResultBean queryUser(String userKey) {
         ResultBean result =  userManage.queryUser(userKey);
         return result;
@@ -42,8 +42,38 @@ public class UserController {
         return result;
     }
     @RequestMapping(value = "/changeUserStatus", method = RequestMethod.POST)
-    public ResultBean deleteUser(String userId,String status) {
+    public ResultBean changeUserStatus(String userId,String status) {
         ResultBean result =  userManage.changeUserStatus(userId,status);
+        return result;
+    }
+    @RequestMapping(value = "/queryOrganization", method = RequestMethod.POST)
+    public ResultBean queryOrganization(String type ,String key) {
+        ResultBean result =  userManage.queryOrganization(type,key);
+        return result;
+    }
+    @RequestMapping(value = "/queryOrgaTree", method = RequestMethod.GET)
+    public ResultBean queryOrgaTree() {
+        ResultBean result =  userManage.queryOrgaTree();
+        return result;
+    }
+    @RequestMapping(value = "/addOrg", method = RequestMethod.POST)
+    public ResultBean addOrg(String orgname,String orgno) {
+        ResultBean result =  userManage.addOrg(orgname,orgno);
+        return result;
+    }
+    @RequestMapping(value = "/addDept", method = RequestMethod.POST)
+    public ResultBean addDept(String deptname,String deptno,String parentid) {
+        ResultBean result =  userManage.addDept(deptname,deptno,parentid);
+        return result;
+    }
+    @RequestMapping(value = "/deleteOrg", method = RequestMethod.POST)
+    public ResultBean deleteOrg(String id) {
+        ResultBean result =  userManage.deleteOrg(id);
+        return result;
+    }
+    @RequestMapping(value = "/editOrg", method = RequestMethod.POST)
+    public ResultBean editOrg(String id,String orgname,String orgno) {
+        ResultBean result =  userManage.editOrg(id,orgname,orgno);
         return result;
     }
 }
