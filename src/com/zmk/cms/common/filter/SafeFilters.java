@@ -43,10 +43,10 @@ public class SafeFilters implements Filter {
         // System.out.println(url);
         LOG.debug("url：" + url);
         // 欢迎页
-        if ("/layuiCMS/".equalsIgnoreCase(url)) {
-            chain.doFilter(request, response);
-            return;
-        }
+//        if ("/layuiCMS/index.html".equalsIgnoreCase(url)) {
+//            chain.doFilter(request, response);
+//            //return;
+//        }
         String[] array = EXCEPT_REQ.split("#");
         for (int i = 0; i < array.length; i++) {
             if (url.contains(array[i])) {
@@ -54,7 +54,8 @@ public class SafeFilters implements Filter {
                 return;
             }
         }
-        String useID = (String) session.getAttribute("ID");
+        
+        String useID = (String) session.getAttribute("id");
         if (useID != null) {
             chain.doFilter(request, response);
         } else {

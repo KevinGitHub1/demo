@@ -43,7 +43,6 @@ public class LoginController {
         return resultBean;
     }
 
-    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/getRyxxSession", method = RequestMethod.GET)
     public ResultBean getRyxxSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -51,26 +50,9 @@ public class LoginController {
         HttpSession obj = (HttpSession) session.getAttribute("cmsSession");
         Map<String, Object> result = new HashMap<String, Object>();
         if (obj != null) {
-            result.put("ID", (String) obj.getAttribute("ID"));
-            result.put("NAME", (String) obj.getAttribute("NAME"));
-            result.put("USERNAME", (String) obj.getAttribute("USERNAME"));
-            result.put("PASSWORD", (String) obj.getAttribute("PASSWORD"));
-            result.put("POWERS", (String) obj.getAttribute("POWERS"));
-            result.put("GH", (String) obj.getAttribute("GH"));
-            result.put("DEPID", (String) obj.getAttribute("DEPID"));
-            result.put("DWMC", (String) obj.getAttribute("DWMC"));
-            result.put("TYPE", (String) obj.getAttribute("TYPE"));
-            result.put("DWJB", (String) obj.getAttribute("DWJB"));
-            result.put("level1MenuId", (String) obj
-                    .getAttribute("level1MenuId"));
-            result.put("level2MenuId", (String) obj
-                    .getAttribute("level2MenuId"));
-            result.put("level3MenuId", (String) obj
-                    .getAttribute("level3MenuId"));
-            String fileNameConfigType = "";
-            result.put("fileNameConfigType", fileNameConfigType);
-            result.put("allMenus", (List<Map<String, Object>>) obj
-                    .getAttribute("allMenus"));
+            result.put("id", (String) obj.getAttribute("id"));
+            result.put("login_name", (String) obj.getAttribute("login_name"));
+            result.put("name", (String) obj.getAttribute("name"));
         }
         if (obj != null) {
             resultBean.setFlag("success");

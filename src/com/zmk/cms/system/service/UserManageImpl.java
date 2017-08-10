@@ -253,12 +253,12 @@ public class UserManageImpl implements IUserManage{
     }
 
     @Override
-    public ResultBean addOrg(String orgname,String orgno) {
+    public ResultBean addOrg(String orgname,String orgno,String loginName) {
         ResultBean result = new ResultBean();
         String id = CommUtil.getUUID();
         String   sysdate = CommUtil.getCurrentTime();
         String sql = "insert into t_sys_organization(id,name,type,parentid,deptno,create_persion,create_date)" +
-        		" values('"+id+"','"+orgname+"','1','0','"+orgno+"','admin','"+sysdate+"')";
+        		" values('"+id+"','"+orgname+"','1','0','"+orgno+"','"+loginName+"','"+sysdate+"')";
         int i = 0;
         try {
                 i = apacheDBUtils.update(sql);
@@ -276,12 +276,12 @@ public class UserManageImpl implements IUserManage{
         return result;
     }
     @Override
-    public ResultBean addDept(String deptname,String deptno,String parentid) {
+    public ResultBean addDept(String deptname,String deptno,String parentid,String loginName) {
         ResultBean result = new ResultBean();
         String id = CommUtil.getUUID();
         String   sysdate = CommUtil.getCurrentTime();
         String sql = "insert into t_sys_organization(id,name,type,parentid,deptno,create_persion,create_date)" +
-                " values('"+id+"','"+deptname+"','2','"+parentid+"','"+deptno+"','admin','"+sysdate+"')";
+                " values('"+id+"','"+deptname+"','2','"+parentid+"','"+deptno+"','"+loginName+"','"+sysdate+"')";
         int i = 0;
         try {
                 i = apacheDBUtils.update(sql);
@@ -362,11 +362,11 @@ public class UserManageImpl implements IUserManage{
     }
 
     @Override
-    public ResultBean editOrg(String id, String orgname, String orgno) {
+    public ResultBean editOrg(String id, String orgname, String orgno,String loginName) {
         ResultBean result = new ResultBean();
         String   sysdate = CommUtil.getCurrentTime();
         String sql = "update t_sys_organization set name='"+orgname+"',deptno='"+orgno+"'," +
-        		"edite_persion='admin',edite_date='"+sysdate+"' where id='"+id+"' ";
+        		"edite_persion='"+loginName+"',edite_date='"+sysdate+"' where id='"+id+"' ";
         int i = 0;
         try {
             i = apacheDBUtils.update(sql);

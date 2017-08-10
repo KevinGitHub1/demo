@@ -17,15 +17,20 @@ layui.use(['jquery','layer','form'],function(){
     }).resize();
     var username = "";
 	var password = "";
+	var validatecode = "";
     //登录
     $(".submit_btn").click(function(){
 	    var a =validateName();
 	    var b = true;
+	    var c = true;
 	    if(a){
 	    	b = validatePassWord();
+	    	if(b){
+	    		c=validateCode();
+	    	}
 	    }
 	    
-	    if(a&&b){
+	    if(a&&b&&c){
 	    	$.ajax({
 			        type: "POST",
 			        url: "web/login/checkUser",
@@ -39,9 +44,6 @@ layui.use(['jquery','layer','form'],function(){
 		        		
 			        	var currentUser = data.resultBean.content;
 		            	if(data.resultBean.flag=="success") {
-		            		$.session.set("currentUserId",currentUser.id);
-							$.session.set("currentUserName",currentUser.name);
-							$.session.set("currentLoginName",currentUser.login_name);
  		            		location.href="./index.html";
 		            	}else{
 		            		layer.msg("用户名或密码错误！");
@@ -51,6 +53,7 @@ layui.use(['jquery','layer','form'],function(){
 	    }
  	        	
     });
+    //验证用户名信息是否填写正确
     function validateName(){
     	 username = $("#u_name").val();
 	   
@@ -70,6 +73,7 @@ layui.use(['jquery','layer','form'],function(){
        }
     	return validate ;
     }
+    //验证密码是否填写正确
     function validatePassWord(){
     	  password = $("#u_password").val();
     	  var validate = true;
@@ -85,11 +89,40 @@ layui.use(['jquery','layer','form'],function(){
     	}
     	  return validate ;
     }
+    //判断验证码是否输入正确
+    function validateCode(){
+    	  var code = $("#code").val();
+    	  var validate = true;
+    	  if(code==""){
+    		  validate = false;
+    		  layer.msg("验证码不能为空！");
+    	  }else if(code!=validatecode){
+    		   validate = false;
+    		   layer.msg("验证码输入不正确！");
+    	}
+    	  return validate ;
+    }
+    document.getElementById('verifyImg').onclick = randomString;
+    //生成四位随机验证码
+    function randomString() {
+　　var len = 4;
+　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+　　var maxPos = $chars.length;
+　　var pwd = '';
+　　for (var i = 0; i < len; i++) {
+　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+　　}
+　　// 验证码写入span区域
+    validatecode = pwd;
+	document.getElementById('verifyImg').innerHTML = pwd;
+}
+    //初始化
     $(function(){
         $("#canvas").jParticle({
             background: "#141414",
             color: "#E5E5E5"
         });
+        randomString();
     });
 
 });

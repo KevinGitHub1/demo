@@ -7,12 +7,14 @@ layui.config({
 		element = layui.element();
 		$ = layui.jquery;
 		tab = layui.bodyTab();
-		var userId = $.session.get("currentUserId");
-		var loginName = $.session.get("currentLoginName");
-		if(loginName==""||undefined==loginName){
+		var session = $.session.get();
+		if(undefined==session){
 			location.href="./login.html";
+			return;
 		}
-    $("#currentUser").html(loginName);
+		var loginName = session.login_name;
+		var userId = session.id;
+    $("#currentUser").html(session.login_name);
     //退出系统
     function loginOut(){
     	layer.open({
@@ -324,6 +326,6 @@ function donation(){
 		}]
 	})
 }
-$(function(){ 
-     getTianQi();
-});
+//$(function(){ 
+//     getTianQi();
+//});

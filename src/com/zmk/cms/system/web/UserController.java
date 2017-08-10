@@ -18,6 +18,7 @@ public class UserController {
     private IUserManage userManage;
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public ResultBean addUser(User user, HttpServletRequest request) {
+        
         ResultBean result =  userManage.addUser(user);
         return result;
     }
@@ -57,13 +58,15 @@ public class UserController {
         return result;
     }
     @RequestMapping(value = "/addOrg", method = RequestMethod.POST)
-    public ResultBean addOrg(String orgname,String orgno) {
-        ResultBean result =  userManage.addOrg(orgname,orgno);
+    public ResultBean addOrg(String orgname,String orgno,HttpServletRequest request) {
+        String loginName = (String) request.getSession().getAttribute("login_name");
+        ResultBean result =  userManage.addOrg(orgname,orgno,loginName);
         return result;
     }
     @RequestMapping(value = "/addDept", method = RequestMethod.POST)
-    public ResultBean addDept(String deptname,String deptno,String parentid) {
-        ResultBean result =  userManage.addDept(deptname,deptno,parentid);
+    public ResultBean addDept(String deptname,String deptno,String parentid,HttpServletRequest request) {
+        String loginName = (String) request.getSession().getAttribute("login_name");
+        ResultBean result =  userManage.addDept(deptname,deptno,parentid,loginName);
         return result;
     }
     @RequestMapping(value = "/deleteOrg", method = RequestMethod.POST)
@@ -72,8 +75,9 @@ public class UserController {
         return result;
     }
     @RequestMapping(value = "/editOrg", method = RequestMethod.POST)
-    public ResultBean editOrg(String id,String orgname,String orgno) {
-        ResultBean result =  userManage.editOrg(id,orgname,orgno);
+    public ResultBean editOrg(String id,String orgname,String orgno,HttpServletRequest request) {
+        String loginName = (String) request.getSession().getAttribute("login_name");
+        ResultBean result =  userManage.editOrg(id,orgname,orgno,loginName);
         return result;
     }
 }

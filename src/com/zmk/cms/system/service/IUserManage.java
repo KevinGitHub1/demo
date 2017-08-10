@@ -59,8 +59,8 @@ public interface IUserManage {
      */
     public ResultBean queryOrganization(String type,String key);
     public ResultBean queryOrgaTree();
-    public ResultBean addOrg(String orgname, String orgno);
-    public ResultBean addDept(String deptname, String deptno, String parentid);
+    public ResultBean addOrg(String orgname, String orgno, String loginName);
+    public ResultBean addDept(String deptname, String deptno, String parentid, String loginName);
     public ResultBean deleteOrg(String id);
-    public ResultBean editOrg(String id, String orgname, String orgno);
+    public ResultBean editOrg(String id, String orgname, String orgno, String loginName);
 }
