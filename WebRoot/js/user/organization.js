@@ -5,7 +5,11 @@ layui.config({
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage,
 		$ = layui.jquery;
-	
+	var userId = localStorage.getItem("userid");
+		if(userId==null){
+			location.href="../../login.html";
+			return;
+		}
 	//查询树节点信息
 	var treeData = "";
 	 currentItem ="";

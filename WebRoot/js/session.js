@@ -18,6 +18,7 @@
 			        	var currentUser = data.resultBean.content;
 		            	if(data.resultBean.flag=="success") {
 		            		session = {};
+		            		debugger;
 		            		session.id=data.resultBean.content.id;
 		            		session.name=data.resultBean.content.name;
 		            		session.login_name=data.resultBean.content.login_name;
@@ -51,5 +52,4 @@
 		   return session;
 		 }
 	 };
-	  $.session._init();	
 })(jQuery);

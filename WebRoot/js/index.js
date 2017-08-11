@@ -7,14 +7,13 @@ layui.config({
 		element = layui.element();
 		$ = layui.jquery;
 		tab = layui.bodyTab();
-		var session = $.session.get();
-		if(undefined==session){
+		var loginName = localStorage.getItem("loginName");
+		var userId = localStorage.getItem("userid");
+		if(userId==null){
 			location.href="./login.html";
 			return;
 		}
-		var loginName = session.login_name;
-		var userId = session.id;
-    $("#currentUser").html(session.login_name);
+    $("#currentUser").html(loginName);
     //退出系统
     function loginOut(){
     	layer.open({
@@ -27,7 +26,6 @@ layui.config({
     		 layui.data('navbarCache' , null);
     		 layer.closeAll();
              localStorage.clear();
-             $.session.clear();
     		location.href="./login.html";
         }, no: function(){
            //取消关闭此页面

@@ -5,7 +5,10 @@ layui.config({
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage,
 		$ = layui.jquery;
-
+if(undefined==localStorage||localStorage==null){
+			location.href="../../login.html";
+			return;
+		}
 	//从后台获取数据
 	var usersData = '';
 	$.ajax({

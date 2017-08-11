@@ -41,11 +41,14 @@ layui.use(['jquery','layer','form'],function(){
 			        dataType: "json",
 			        async:false,
 			        success: function(data){
-		        		
 			        	var currentUser = data.resultBean.content;
 		            	if(data.resultBean.flag=="success") {
+		            	localStorage.setItem("userid",data.resultBean.content.id);
+		            	localStorage.setItem("loginName",data.resultBean.content.login_name);
+		            	localStorage.setItem("userName",data.resultBean.content.name);
  		            		location.href="./index.html";
 		            	}else{
+		            		localStorage=null;
 		            		layer.msg("用户名或密码错误！");
 		            	}
 		            }

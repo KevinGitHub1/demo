@@ -6,6 +6,11 @@ layui.config({
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage;
 		$ = layui.jquery;
+		var userId = localStorage.getItem("userid");
+		if(userId==null){
+			location.href="../../login.html";
+			return;
+		}
 		//添加部门时初始化上级单位信息
 		var parentid=parent.currentItem.id;
 		var parentName = parent.currentItem.name;

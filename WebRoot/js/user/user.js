@@ -10,6 +10,11 @@ layui.config({
 		$ = layui.jquery;
 		$form = $('form');
 		laydate = layui.laydate;
+		var userId = localStorage.getItem("userid");
+		if(userId==null){
+			location.href="../../login.html";
+			return;
+		}
         layui.upload({
         	url : "../../json/userface.json",
         	success: function(res){
